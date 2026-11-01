@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin login — Your Brand</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23119b5d'/%3E%3Cpath d='M32 10 52 21v22L32 54 12 43V21z' fill='none' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="login-page" id="login-page">
+    <section class="login-card" aria-labelledby="login-title">
+      <a class="login-brand" id="login-brand" href="../index.html">Falaq <b>Food</b></a>
+      <form id="login-form">
+        <label for="username">Email</label>
+        <input id="username" name="username" type="email" autocomplete="email" placeholder="Enter your email" required autofocus>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        <p class="login-error" id="login-error" aria-live="polite"></p>
+        <button class="button button-primary" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+      <a class="back-link" href="../index.html">← Back to storefront</a>
+    </section>
+    <div class="login-decoration" aria-hidden="true"><span>F</span></div>
+  </main>
+
+  <div class="admin-app" id="admin-app" hidden>
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation">
+      <div class="sidebar-head">
+        <a class="sidebar-brand" id="sidebar-brand" href="../index.html" aria-label="Admin home"><span class="brand-icon"><img class="admin-brand-logo" id="admin-brand-logo" alt="" hidden><span id="brand-icon">Y</span></span><span class="brand-name"><span id="sidebar-brand-name">Your Brand</span><small>ADMIN STUDIO</small></span></a>
+        <button class="sidebar-collapse" id="sidebar-collapse" type="button" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
+      </div>
+      <span class="nav-caption">MENU</span>
+      <nav class="side-nav" aria-label="Admin sections">
+        <a class="side-link active" href="#dashboard" data-title="Dashboard" aria-current="page" title="Dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+        <span class="nav-caption orders-nav-caption">ORDERS</span>
+        <a class="side-link order-nav-link" href="#orders-all" data-title="All Orders" data-order-filter="All" title="All Orders"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v17H5zM8 8h8M8 12h8M8 16h5"/></svg><span>All Orders</span></a>
+        <a class="side-link order-nav-link" href="#orders-pending" data-title="Pending" data-order-filter="Pending" title="Pending"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Pending</span></a>
+        <a class="side-link order-nav-link" href="#orders-processing" data-title="Processing" data-order-filter="Processing" title="Processing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h12M4 17h8"/></svg><span>Processing</span></a>
+        <a class="side-link order-nav-link" href="#orders-completed" data-title="Completed" data-order-filter="Completed" title="Completed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Completed</span></a>
+        <a class="side-link order-nav-link" href="#orders-cancelled" data-title="Cancelled" data-order-filter="Cancelled" title="Cancelled"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg><span>Cancelled</span></a>
+        <a class="side-link" href="#header" data-title="Header" title="Header"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M13 6.5h.01M7 13h4m-4 3h7"/></svg><span>Header</span></a>
+        <a class="side-link" href="#product" data-title="Product" title="Product"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/><path d="m7.5 5 9 4"/></svg><span>Product</span></a>
+        <a class="side-link" href="#delivery-charges" data-title="Delivery Charges" title="Delivery Charges"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v11h-11zM13.5 10h4l4 4v3h-8"/><circle cx="6.5" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/><path d="M15.5 12.5h2.2"/></svg><span>Delivery Charges</span></a>
+        <a class="side-link" href="#footer" data-title="Footer" title="Footer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/><path d="M8 12h8m-8 0 3-3m-3 3 3 3m5-6v6"/></svg><span>Footer</span></a>
+        <a class="side-link" href="#colors" data-title="Color and Layout" title="Color and Layout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18h1.1a2 2 0 0 0 1.4-3.4 1.7 1.7 0 0 1 1.2-2.9H18a3 3 0 0 0 3-3c0-4.8-4-8.7-9-8.7Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/></svg><span>Color and Layout</span></a>
+        <a class="side-link" href="#settings" data-title="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg><span>Settings</span></a>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <a class="side-link profile-link" href="#profile" data-title="Profile" title="Profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Profile</span></a>
+      <button class="side-link logout-link" id="logout-button" type="button" title="Log out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg><span>Log out</span></button>
+      <div class="sidebar-user"><span class="user-avatar">A</span><span class="user-label">Admin<small>Administrator</small></span><span class="user-more">···</span></div>
+    </aside>
+    <button class="sidebar-backdrop" id="sidebar-backdrop" type="button" aria-label="Close navigation"></button>
+    <main class="main">
+      <header class="topbar"><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="heading-group"><h1 id="page-heading">Dashboard</h1></div><span class="save-message top-save-message" id="title-save-message" aria-live="polite"></span><button class="settings-save top-save" id="settings-save-button" type="button">Save changes</button></header>
+      <section class="settings-view" id="dashboard-view">
+        <div class="settings-heading"><div><h2>Orders</h2></div></div>
+        <nav class="orders-status-tabs" id="orders-status-tabs" aria-label="Filter orders">
+          <button type="button" data-filter="All">All Orders <span>0</span></button><button type="button" data-filter="Pending">Pending <span>0</span></button><button type="button" data-filter="Processing">Processing <span>0</span></button><button type="button" data-filter="Completed">Completed <span>0</span></button><button type="button" data-filter="Cancelled">Cancelled <span>0</span></button>
+        </nav>
+        <p id="orders-message" aria-live="polite"></p><div class="orders-list" id="orders-list"></div>
+      </section>
+      <section class="settings-view" id="header-view" hidden>
+        <form class="settings-form" id="main-title-form">
+          <label for="brand-name-input">Brand name</label>
+          <input id="brand-name-input" name="brand-name" type="text" maxlength="80" placeholder="Enter the brand name" required>
+          <label for="main-title-input">Title</label>
+          <input id="main-title-input" name="main-title" type="text" maxlength="100" placeholder="Enter the main page title" required>
+          <label for="logo-url-input">Logo image URL</label>
+          <input id="logo-url-input" name="logo-url" type="url" inputmode="url" placeholder="https://example.com/logo.png">
+          <label for="logo-file-input">Or upload a logo file</label>
+          <input id="logo-file-input" name="logo-file" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif">
+          <span class="upload-message" id="logo-upload-message" aria-live="polite"></span>
+          <label for="benefit-natural-input">Benefit text</label>
+          <input id="benefit-natural-input" type="text" maxlength="80" required>
+          <label for="benefit-payment-input">Payment type</label>
+          <input id="benefit-payment-input" type="text" maxlength="80" required>
+          <label for="benefit-delivery-input">Delivery type</label>
+          <input id="benefit-delivery-input" type="text" maxlength="80" required>
+          <label for="benefit-trusted-input">Trust Text</label>
+          <input id="benefit-trusted-input" type="text" maxlength="100" required>
+          <label for="order-phone-input">Order phone number</label>
+          <input id="order-phone-input" type="tel" maxlength="32" required>
+        </form>
+      </section>
+      <section class="settings-view" id="colors-view" hidden>
+        <div class="settings-heading"><div><h2>Site colors</h2><p class="field-help">Set the three colors used across your storefront.</p></div></div>
+        <form class="settings-form" id="colors-form">
+          <label for="primary-color">Primary</label><div class="color-input-row"><input id="primary-picker" type="color" value="#119b5d" aria-label="Choose primary color"><input id="primary-color" type="text" value="#119b5d" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#119b5d" required></div><span class="field-help">Main brand color for buttons, prices, and highlights.</span>
+          <label for="secondary-color">Secondary</label><div class="color-input-row"><input id="secondary-picker" type="color" value="#172637" aria-label="Choose secondary color"><input id="secondary-color" type="text" value="#172637" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#172637" required></div><span class="field-help">Supporting color for headings and key text.</span>
+          <label for="tertiary-color">Tertiary</label><div class="color-input-row"><input id="tertiary-picker" type="color" value="#8190a1" aria-label="Choose tertiary color"><input id="tertiary-color" type="text" value="#8190a1" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#8190a1" required></div><span class="field-help">Soft color for secondary text, borders, and subtle details.</span>
+        </form>
+      </section>
+      <section class="settings-view" id="product-view" hidden>
+        <div class="settings-heading"><div><h2>Product settings</h2></div></div>
+        <form class="settings-form" id="product-form">
+          <label for="product-title-input">Product title</label>
+          <input id="product-title-input" name="product-title" type="text" maxlength="180" placeholder="Enter the product title" required>
+          <fieldset class="pricing-mode-picker"><legend>Size options</legend>
+            <label><input type="radio" name="pricing-mode" value="single" checked> Single</label>
+            <label><input type="radio" name="pricing-mode" value="multiple"> Multiple</label>
+          </fieldset>
+          <section class="price-group" id="single-price-settings"><h3>Single price</h3>
+            <label for="single-price">Price</label><input id="single-price" type="number" min="0" step="1" value="950" required>
+            <label for="single-discount">Discount price</label><input id="single-discount" type="number" min="0" step="1" value="1200" required>
+            <label for="single-saving">Saved money</label><input id="single-saving" type="number" min="0" step="1" value="250" required>
+          </section>
+          <section id="multiple-pricing" hidden>
+            <h3>Size prices</h3>
+            <div class="tier-list" id="tier-list"></div>
+            <button class="add-tier-button" id="add-tier-button" type="button">＋ Add quantity</button>
+          </section>
+          <label for="product-image-url">Product image link</label>
+          <input id="product-image-url" name="product-image-url" type="url" inputmode="url" placeholder="https://example.com/product-image.jpg">
+          <label for="product-image-file">Or upload a product image</label>
+          <input id="product-image-file" name="product-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          <span class="upload-message" id="product-upload-message" aria-live="polite"></span>
+          <div class="product-image-preview-wrap"><img id="product-image-preview" alt="Product image preview" hidden></div>
+        </form>
+      </section>
+      <section class="settings-view" id="delivery-charges-view" hidden>
+        <div class="settings-heading"><div><h2>Delivery charges</h2></div></div>
+        <form class="settings-form" id="delivery-charges-form">
+          <label for="delivery-message-input">Order confirmation message</label><textarea id="delivery-message-input" rows="3" placeholder="Thank you for your order. Your order number is {order_no}."></textarea><span class="field-help">Available placeholders: {order_no}, {area}, and {charge}.</span>
+          <div class="delivery-area-list" id="delivery-area-list"></div>
+          <button class="add-tier-button" id="add-delivery-area" type="button">＋ Add area</button>
+        </form>
+      </section>
+      <section class="settings-view" id="footer-view" hidden>
+        <div class="settings-heading"><div><h2>Footer content</h2><p class="field-help">Update your description, contact details, WhatsApp, and social profile links shown on the storefront.</p></div></div>
+        <form class="settings-form" id="footer-form">
+          <label for="footer-description-input">Footer description</label><textarea id="footer-description-input" rows="3" placeholder="A short description about your business"></textarea>
+          <label for="footer-location-input">Office location</label><textarea id="footer-location-input" rows="2" placeholder="Street or area, city"></textarea>
+          <label for="footer-email-input">Email</label><input id="footer-email-input" type="email" inputmode="email" placeholder="hello@example.com">
+          <label for="footer-number-input">Phone number</label><input id="footer-number-input" type="tel" inputmode="tel" placeholder="+8801XXXXXXXXX" required>
+          <label for="footer-whatsapp-input">WhatsApp number</label><input id="footer-whatsapp-input" type="tel" inputmode="tel" placeholder="+8801XXXXXXXXX">
+          <label for="social-facebook">Facebook</label><input id="social-facebook" type="url" inputmode="url" placeholder="https://facebook.com/your-page">
+          <label for="social-instagram">Instagram</label><input id="social-instagram" type="url" inputmode="url" placeholder="https://instagram.com/your-profile">
+          <label for="social-linkedin">LinkedIn</label><input id="social-linkedin" type="url" inputmode="url" placeholder="https://linkedin.com/company/your-page">
+          <label for="social-youtube">YouTube</label><input id="social-youtube" type="url" inputmode="url" placeholder="https://youtube.com/@your-channel">
+        </form>
+      </section>
+      <section class="settings-view" id="settings-view" hidden>
+        <div class="settings-heading"><h2>Supabase settings</h2></div>
+        <form class="settings-form" id="supabase-settings-form">
+          <label for="supabase-url">Project URL</label>
+          <input id="supabase-url" name="supabase-url" type="url" inputmode="url" placeholder="https://your-project.supabase.co" autocomplete="url" required>
+          <label for="supabase-key">Publishable key</label>
+          <input id="supabase-key" name="supabase-key" type="text" spellcheck="false" autocomplete="off" placeholder="sb_publishable_…" required>
+          <fieldset class="payment-mode-picker"><legend>Order payment mode</legend>
+            <label><input type="radio" name="payment-mode" value="pay-on-delivery" checked> Pay on delivery</label>
+            <label><input type="radio" name="payment-mode" value="prepaid"> Prepay required</label>
+          </fieldset>
+          <div id="uddoktapay-key-wrap" hidden><label for="uddoktapay-base-url">UddoktaPay API base URL</label><input id="uddoktapay-base-url" type="url" value="https://smmcaptain.paymently.io/api" placeholder="https://smmcaptain.paymently.io/api"><label for="uddoktapay-api-key">UddoktaPay API key</label><input id="uddoktapay-api-key" type="password" autocomplete="new-password" placeholder="Enter your UddoktaPay API key"><span class="field-help">Stored in Supabase and used only by the payment backend.</span></div>
+          <div class="settings-actions"><span class="save-message" id="settings-save-message" aria-live="polite"></span></div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../favicon.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

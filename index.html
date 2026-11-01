@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Your Brand — 100% natural, delivered fresh to your door.">
+  <link id="site-favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23119b5d'/%3E%3Cpath d='M32 10 52 21v22L32 54 12 43V21z' fill='none' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
+  <title>Your Brand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#home" aria-label="Your Brand home">
+        <img class="brand-image" id="store-logo" alt="" hidden>
+        <span id="store-brand">Your Brand</span>
+      </a>
+
+      <nav class="benefits" aria-label="Why shop with Your Brand">
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-4.4-8-11a4.3 4.3 0 0 1 8-2.1A4.3 4.3 0 0 1 20 10c0 6.6-8 11-8 11Z"/><path d="M12 19V9m0 3c-2.2 0-3.7-.9-4.7-2.4M12 15c2 0 3.6-.8 4.7-2.5"/></svg>
+          <span id="benefit-natural">Product Quality</span>
+        </div>
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9h.01M18 15h.01"/></svg>
+          <span id="benefit-payment">Cash on Delivery</span>
+        </div>
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v12H3zM14 10h4l3 3v5h-7z"/><circle cx="7.5" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M1.5 9h8M1.5 12h6"/></svg>
+          <span id="benefit-delivery">Fast Delivery</span>
+        </div>
+        <div class="benefit trusted">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2-4.5-4.4 6.3-.9L12 2.8Z"/></svg>
+          <span id="benefit-trusted">Trusted by 10,000+ Customers</span>
+        </div>
+      </nav>
+
+      <a class="order-call" id="order-call" href="tel:09613821489">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8h3l1.5 4.8-2 1.8a16 16 0 0 0 5.5 5.5l1.8-2 4.8 1.5v3a2.4 2.4 0 0 1-2.6 2.5C9.7 19.1 4.9 14.3 4.1 5.4a2.4 2.4 0 0 1 2.5-2.6Z"/></svg>
+        <span><strong id="order-phone">09613-821489</strong></span>
+      </a>
+    </div>
+  </header>
+  <main id="home" aria-label="Your Brand home">
+    <section class="checkout-layout" aria-label="Product order">
+      <div class="product-visual" role="img" aria-label="Primal Gold mustard oil pickle jar">
+        <img class="product-photo" id="product-photo" alt="Primal Gold product" hidden>
+        <div class="visual-glow"></div>
+        <div class="visual-brand">ফালাক<br>ফুড</div>
+        <div class="visual-copy">স্বাদে ভরুক<br>প্রতিটি মুহূর্ত</div>
+        <div class="product-jar"><div class="jar-lid"></div><div class="jar-neck"></div><div class="jar-body"><div class="jar-label"><span>🌿</span><b>PRIMAL<br><strong>GOLD</strong></b><small>প্রিমিয়াম আচার</small></div><div class="pickle"></div></div></div>
+        <div class="visual-caption"><span>www.falaqfood.com</span><span>☎ 09613-821489</span></div>
+      </div>
+      <div class="order-panel">
+        <section class="product-details">
+          <h1 id="product-title">Primal Gold (প্রাইমাল গোল্ড) – সুখী দাম্পত্যের সুন্দর মুহূর্তগুলোকে আরো সুন্দর করুন</h1>
+          <div class="price-line"><strong id="product-price">৳950</strong><del id="product-original-price">৳1,200</del><span class="saving">Save <span id="product-saving">৳250</span></span></div>
+          <div class="field-label" id="quantity-choice-label">Quantity</div>
+          <div class="quantity-control" id="single-quantity-control"><strong>Quantity</strong><div><button id="qty-minus" aria-label="Decrease quantity">−</button><output id="quantity">1</output><button id="qty-plus" aria-label="Increase quantity">＋</button></div></div>
+          <div class="quantity-tier-options" id="quantity-tier-options" role="group" aria-label="Choose size" hidden></div>
+          <h2 class="section-heading"><span class="round-icon">♙</span> Enter your information</h2>
+          <form id="order-form">
+            <label class="input-wrap"><span>Full Name <b>*</b></span><svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><input name="customer_name" class="with-icon" type="text" autocomplete="name" placeholder="আপনার নাম লিখুন...." maxlength="120" required></label>
+            <label class="input-wrap"><span>Phone Number <b>*</b></span><svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l1.5 4.5-2 1.8a15 15 0 0 0 5.2 5.2l1.8-2L21 14v3a2 2 0 0 1-2.2 2C10.3 18.3 5.7 13.7 5 5.2A2 2 0 0 1 7 3Z"/></svg><input name="phone" class="with-icon" type="tel" autocomplete="tel" placeholder="01XXXXXXXXX" maxlength="32" required></label>
+            <label class="input-wrap" id="order-email-wrap" hidden><span>Email <b>*</b></span><svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><input name="email" class="with-icon" type="email" autocomplete="email" placeholder="you@example.com"></label>
+            <label class="input-wrap"><span>Address <b>*</b></span><svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><input name="address" class="with-icon" type="text" autocomplete="street-address" placeholder="আপনার ঠিকানা লিখুন...." maxlength="500" required></label>
+            <label class="input-wrap notes-wrap"><span>Order Notes <small>(Optional)</small></span><svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5 5 5M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z"/></svg><textarea name="notes" class="with-icon" placeholder="Share your notes"></textarea></label>
+          </form>
+          <p id="order-submit-message" aria-live="polite"></p>
+        </section>
+        <aside class="checkout-summary">
+          <h2 class="section-heading"><span class="round-icon pin-icon">◎</span> Select your delivery area</h2>
+          <div class="delivery-options" id="delivery-options" role="group" aria-label="Select delivery area"></div>
+          <div class="bill-card">
+            <div class="bill-product"><div class="mini-product"><span>🍯</span></div><div><strong id="bill-product-title">Primal Gold (প্রাইমাল গোল্ড) – সুখী দাম্পত্যের সুন্দর মুহূর্তগুলোকে আরো সুন্দর করুন</strong><small id="bill-variant">450gm&nbsp; | &nbsp;1x</small></div><b id="bill-subtotal">৳950</b></div>
+            <div class="bill-row"><span>Subtotal</span><strong id="bill-subtotal-row">৳950</strong></div>
+            <div class="bill-row"><span>Delivery Charge</span><strong id="delivery-charge">৳100</strong></div>
+            <div class="bill-total"><span>Total Price</span><strong id="total-price">৳1,050</strong></div>
+          </div>
+          <p class="privacy-note">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#privacy">privacy policy</a>.</p>
+          <button class="confirm-order" type="submit" form="order-form"><span>♧</span> অর্ডার কনফার্ম করুন</button>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <section class="footer-brand-block">
+        <a class="footer-brand" href="#home" aria-label="Store home">
+          <img id="footer-logo" alt="" hidden>
+          <span id="footer-brand-name">Your Brand</span>
+        </a>
+        <p id="footer-description">Quality products, carefully selected and delivered to your door.</p>
+        <nav class="footer-socials" aria-label="Social media">
+          <a id="social-link-facebook" aria-label="Facebook" title="Facebook" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 21v-8h2.7l.4-3H14V8.1c0-.9.3-1.6 1.6-1.6h1.7V3.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H8v3h2.6v8Z"/></svg></a>
+          <a id="social-link-instagram" aria-label="Instagram" title="Instagram" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.7" cy="6.6" r=".8" class="social-icon-dot"/></svg></a>
+          <a id="social-link-linkedin" aria-label="LinkedIn" title="LinkedIn" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 9h3.4v10H5.2zM6.9 4.8a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM11 9h3.3v1.4c.6-1 1.7-1.7 3.2-1.7 3 0 3.8 2 3.8 4.6V19h-3.5v-5.1c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6V19H11z"/></svg></a>
+          <a id="social-link-youtube" aria-label="YouTube" title="YouTube" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.2a2.5 2.5 0 0 0-1.8-1.8C17.6 6 12 6 12 6s-5.6 0-7.2.4A2.5 2.5 0 0 0 3 8.2 26 26 0 0 0 2.6 12c0 1.3.1 2.6.4 3.8a2.5 2.5 0 0 0 1.8 1.8C6.4 18 12 18 12 18s5.6 0 7.2-.4a2.5 2.5 0 0 0 1.8-1.8c.3-1.2.4-2.5.4-3.8s-.1-2.6-.4-3.8Z"/><path d="m10 9.5 5 2.5-5 2.5z" class="social-icon-play"/></svg></a>
+        </nav>
+      </section>
+      <section class="footer-contact">
+        <h2>Contact</h2>
+        <a id="footer-email-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=corporate%40falaqfood.com" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+          <span id="footer-email">corporate@falaqfood.com</span>
+        </a>
+        <a id="footer-phone-link" href="tel:09613821489">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 3.2h3l1.5 4.6-2 1.8a15 15 0 0 0 5.2 5.2l1.8-2 4.6 1.5v3a2.2 2.2 0 0 1-2.4 2.2C9.8 18.7 5.3 14.2 4.5 5.6a2.2 2.2 0 0 1 2.2-2.4Z"/></svg>
+          <span id="footer-phone">09613-821489</span>
+        </a>
+        <a class="footer-whatsapp" id="footer-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L4 20l1.2-4A8.2 8.2 0 1 1 20.2 11.7Z"/><path d="M9 8.2c.3-.4.5-.4.8-.4h.4c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .4-.2 1.1-.6 1.4-.4.4-1 .6-1.6.6-.8 0-1.8-.3-3.1-1.1-1.6-1-2.8-2.5-3.1-3.1-.4-.7-.7-1.6-.7-2.2 0-.7.3-1.3.7-1.7Z"/></svg>
+          <span id="footer-whatsapp-number"></span>
+        </a>
+      </section>
+      <section class="footer-office">
+        <h2>Office Location</h2>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <address id="footer-location">Bosila Future Town,<br>Mohammadpur, Dhaka-1207</address>
+        </div>
+      </section>
+    </div>
+    <div class="footer-bottom">Copyright © <span id="footer-year"></span> <span id="footer-copyright-brand">Your Brand</span>. All rights reserved.</div>
+  </footer>
+  <a class="floating-whatsapp" id="floating-whatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L4 20l1.2-4A8.2 8.2 0 1 1 20.2 11.7Z"/><path d="M9 8.2c.3-.4.5-.4.8-.4h.4c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .4-.2 1.1-.6 1.4-.4.4-1 .6-1.6.6-.8 0-1.8-.3-3.1-1.1-1.6-1-2.8-2.5-3.1-3.1-.4-.7-.7-1.6-.7-2.2 0-.7.3-1.3.7-1.7Z"/></svg>
+  </a>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="favicon.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
