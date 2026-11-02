@@ -86,8 +86,24 @@
         </form>
       </section>
       <section class="settings-view" id="colors-view" hidden>
-        <div class="settings-heading"><div><h2>Site colors</h2><p class="field-help">Set the three colors used across your storefront.</p></div></div>
+        <div class="settings-heading"><div><h2>Colors and Storefront Design</h2><p class="field-help">Choose a complete storefront style, then set its brand colors.</p></div></div>
         <form class="settings-form" id="colors-form">
+          <fieldset class="layout-picker">
+            <legend>Choose a complete storefront design</legend>
+            <p class="field-help">Each option changes the visual style of your header, product area, checkout, and footer.</p>
+            <div class="layout-card-grid" id="layout-card-grid" role="radiogroup" aria-label="Storefront design">
+              <label class="layout-card selected" data-layout-card="original"><input type="radio" name="layout-style" value="original" checked><span class="layout-preview preview-original"><i></i><i></i><i></i></span><strong>Original Storefront</strong><small>Your current main page design</small></label>
+              <label class="layout-card" data-layout-card="editorial"><input type="radio" name="layout-style" value="editorial"><span class="layout-preview preview-editorial"><i></i><i></i><i></i></span><strong>Arctic Minimal</strong><small>Premium white storefront with glacier accents</small></label>
+              <label class="layout-card" data-layout-card="showcase"><input type="radio" name="layout-style" value="showcase"><span class="layout-preview preview-showcase"><i></i><i></i><i></i></span><strong>Bold Commerce</strong><small>High contrast campaign and split checkout</small></label>
+              <label class="layout-card" data-layout-card="reverse"><input type="radio" name="layout-style" value="reverse"><span class="layout-preview preview-reverse"><i></i><i></i><i></i></span><strong>Glass Frost</strong><small>Layered translucent panels and floating nav</small></label>
+              <label class="layout-card" data-layout-card="compact"><input type="radio" name="layout-style" value="compact"><span class="layout-preview preview-compact"><i></i><i></i><i></i></span><strong>Urban Market</strong><small>Structured marketplace with dedicated order rail</small></label>
+              <label class="layout-card" data-layout-card="immersive"><input type="radio" name="layout-style" value="immersive"><span class="layout-preview preview-immersive"><i></i><i></i><i></i></span><strong>Luxury Editorial</strong><small>High-end brand-led product editorial</small></label>
+              <label class="layout-card" data-layout-card="soft"><input type="radio" name="layout-style" value="soft"><span class="layout-preview preview-soft"><i></i><i></i><i></i></span><strong>Soft Organic</strong><small>Warm shapes and friendly rounded forms</small></label>
+              <label class="layout-card" data-layout-card="midnight"><input type="radio" name="layout-style" value="midnight"><span class="layout-preview preview-midnight"><i></i><i></i><i></i></span><strong>Neon Pulse</strong><small>Dark high-energy storefront with vivid accents</small></label>
+              <label class="layout-card" data-layout-card="minimal"><input type="radio" name="layout-style" value="minimal"><span class="layout-preview preview-minimal"><i></i><i></i><i></i></span><strong>Split Focus</strong><small>Asymmetric product hero and horizontal checkout</small></label>
+              <label class="layout-card" data-layout-card="classic"><input type="radio" name="layout-style" value="classic"><span class="layout-preview preview-classic"><i></i><i></i><i></i></span><strong>Compact Express</strong><small>Mobile-first compact product and checkout</small></label>
+            </div>
+          </fieldset>
           <label for="primary-color">Primary</label><div class="color-input-row"><input id="primary-picker" type="color" value="#119b5d" aria-label="Choose primary color"><input id="primary-color" type="text" value="#119b5d" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#119b5d" required></div><span class="field-help">Main brand color for buttons, prices, and highlights.</span>
           <label for="secondary-color">Secondary</label><div class="color-input-row"><input id="secondary-picker" type="color" value="#172637" aria-label="Choose secondary color"><input id="secondary-color" type="text" value="#172637" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#172637" required></div><span class="field-help">Supporting color for headings and key text.</span>
           <label for="tertiary-color">Tertiary</label><div class="color-input-row"><input id="tertiary-picker" type="color" value="#8190a1" aria-label="Choose tertiary color"><input id="tertiary-color" type="text" value="#8190a1" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#8190a1" required></div><span class="field-help">Soft color for secondary text, borders, and subtle details.</span>

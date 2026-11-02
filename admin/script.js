@@ -6,6 +6,8 @@ const BRAND_NAME_CACHE_KEY = "site-brand-name";
 const LOGO_URL_CACHE_KEY = "site-logo-url";
 const HEADER_COPY_CACHE_KEY = "site-header-copy";
 const SITE_COLORS_KEY = "site-colors";
+const SITE_LAYOUT_KEY = "site-layout";
+const ALLOWED_SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight", "minimal", "classic"]);
 const PRODUCT_IMAGE_CACHE_KEY = "site-product-image-url";
 const PRODUCT_TITLE_CACHE_KEY = "site-product-title";
 const DEFAULT_PRODUCT_TITLE = "Primal Gold (প্রাইমাল গোল্ড) – সুখী দাম্পত্যের সুন্দর মুহূর্তগুলোকে আরো সুন্দর করুন";
@@ -196,6 +198,18 @@ function setSiteColors(values = {}) {
   }
 }
 
+function setSiteLayout(layout = "") {
+  let cached = "classic";
+  try { cached = localStorage.getItem(SITE_LAYOUT_KEY) || cached; } catch { /* keep default */ }
+  const selected = ALLOWED_SITE_LAYOUTS.has(layout) ? layout : cached;
+  const radio = document.querySelector(`input[name="layout-style"][value="${selected}"]`)
+    || document.querySelector('input[name="layout-style"][value="classic"]');
+  if (radio) radio.checked = true;
+  document.querySelectorAll("[data-layout-card]").forEach(card => {
+    card.classList.toggle("selected", card.dataset.layoutCard === (radio?.value || "classic"));
+  });
+}
+
 function setProductImage(url = "") {
   $("product-image-url").value = url;
   const preview = $("product-image-preview");
@@ -368,6 +382,7 @@ async function loadMainTitle() {
   $("logo-url-input").value = localStorage.getItem(LOGO_URL_CACHE_KEY) || "";
   try { setHeaderCopy(JSON.parse(localStorage.getItem(HEADER_COPY_CACHE_KEY) || "{}")); } catch { setHeaderCopy({}); }
   try { setSiteColors(JSON.parse(localStorage.getItem(SITE_COLORS_KEY) || "{}")); } catch { setSiteColors(); }
+  setSiteLayout();
   setProductImage(localStorage.getItem(PRODUCT_IMAGE_CACHE_KEY) || "");
   $("product-title-input").value = localStorage.getItem(PRODUCT_TITLE_CACHE_KEY) || DEFAULT_PRODUCT_TITLE;
   try { setProductPricing(JSON.parse(localStorage.getItem(PRODUCT_PRICING_CACHE_KEY) || "{}")); } catch { setProductPricing(); }
@@ -402,6 +417,8 @@ async function loadMainTitle() {
   if (!error && data) setHeaderCopy(data);
   if (!error && data) {
     setSiteColors(data);
+    setSiteLayout(data.layout_style);
+    if (data.layout_style) localStorage.setItem(SITE_LAYOUT_KEY, data.layout_style);
     if (data.primary_color) localStorage.setItem(SITE_COLORS_KEY, JSON.stringify({ primary_color: data.primary_color, secondary_color: data.secondary_color, tertiary_color: data.tertiary_color }));
   }
   if (!error && data?.product_image_url) {
@@ -553,8 +570,17 @@ for (const name of ["primary", "secondary", "tertiary"]) {
   });
 }
 
+document.querySelectorAll('input[name="layout-style"]').forEach(radio => {
+  radio.addEventListener("change", () => {
+    document.querySelectorAll("[data-layout-card]").forEach(card => {
+      card.classList.toggle("selected", card.dataset.layoutCard === radio.value);
+    });
+  });
+});
+
 $("colors-form").addEventListener("submit", async event => {
   event.preventDefault();
+  const layoutStyle = document.querySelector('input[name="layout-style"]:checked')?.value || "classic";
   const colors = {
     primary_color: $("primary-color").value.trim(),
     secondary_color: $("secondary-color").value.trim(),
@@ -567,13 +593,14 @@ $("colors-form").addEventListener("submit", async event => {
     return;
   }
   localStorage.setItem(SITE_COLORS_KEY, JSON.stringify(colors));
+  localStorage.setItem(SITE_LAYOUT_KEY, layoutStyle);
   const client = getSupabaseClient();
   if (client) {
     message.textContent = "Saving colors…";
     message.style.color = "#85877e";
-    const { error } = await client.from("main_page_settings").upsert({ id: 1, ...colors, updated_at: new Date().toISOString() });
+    const { error } = await client.from("main_page_settings").upsert({ id: 1, ...colors, layout_style: layoutStyle, updated_at: new Date().toISOString() });
     if (error) {
-      message.textContent = "Saved in this browser. Run the latest setup.sql to sync colors across devices.";
+      message.textContent = "Saved here. Run the latest setup.sql to sync colors and layout across devices.";
       message.style.color = "#a56b13";
       return;
     }

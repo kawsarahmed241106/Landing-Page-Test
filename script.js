@@ -4,6 +4,17 @@ const BRAND_NAME_CACHE_KEY = "site-brand-name";
 const LOGO_URL_CACHE_KEY = "site-logo-url";
 const HEADER_COPY_CACHE_KEY = "site-header-copy";
 const SITE_COLORS_KEY = "site-colors";
+const SITE_LAYOUT_KEY = "site-layout";
+const SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight", "minimal", "classic"]);
+
+function applySiteLayout(layout = "") {
+  const cached = localStorage.getItem(SITE_LAYOUT_KEY) || "original";
+  const selected = SITE_LAYOUTS.has(layout) ? layout : SITE_LAYOUTS.has(cached) ? cached : "original";
+  document.body.dataset.layout = selected;
+  const stylesheet = document.getElementById("store-layout-style");
+  if (stylesheet) stylesheet.href = `layouts/layout-${selected}.css`;
+  if (layout) localStorage.setItem(SITE_LAYOUT_KEY, selected);
+}
 const PRODUCT_IMAGE_CACHE_KEY = "site-product-image-url";
 const PRODUCT_TITLE_CACHE_KEY = "site-product-title";
 const PRODUCT_PRICING_CACHE_KEY = "site-product-pricing";
@@ -111,14 +122,20 @@ function applyFooterLocation(value) {
 
 function applyProductImage(url = "") {
   const image = document.getElementById("product-photo");
+  const billImage = document.getElementById("bill-product-image");
+  const billPlaceholder = document.getElementById("bill-product-placeholder");
   const visual = document.querySelector(".product-visual");
   if (url) {
     image.src = url;
     image.hidden = false;
+    if (billImage) { billImage.src = url; billImage.hidden = false; }
+    if (billPlaceholder) billPlaceholder.hidden = true;
     visual.classList.add("has-product-image");
   } else {
     image.removeAttribute("src");
     image.hidden = true;
+    if (billImage) { billImage.removeAttribute("src"); billImage.hidden = true; }
+    if (billPlaceholder) billPlaceholder.hidden = false;
     visual.classList.remove("has-product-image");
   }
 }
@@ -132,11 +149,18 @@ function applySiteColors(values = {}) {
     tertiary_color: values.tertiary_color || cached.tertiary_color || "#8190a1"
   };
   document.documentElement.style.setProperty("--green", colors.primary_color);
+  document.documentElement.style.setProperty("--primary-color", colors.primary_color);
   document.documentElement.style.setProperty("--icon-blue", colors.primary_color);
   document.documentElement.style.setProperty("--ink", colors.secondary_color);
+  document.documentElement.style.setProperty("--secondary-color", colors.secondary_color);
   document.documentElement.style.setProperty("--tertiary", colors.tertiary_color);
+  document.documentElement.style.setProperty("--tertiary-color", colors.tertiary_color);
+  document.documentElement.style.setProperty("--accent-color", colors.primary_color);
+  document.documentElement.style.setProperty("--bg-surface", "#ffffff");
   if (values.primary_color) localStorage.setItem(SITE_COLORS_KEY, JSON.stringify(colors));
 }
+
+applySiteLayout();
 
 function renderIdentity(title, brand, logoUrl, copy = {}) {
   document.getElementById("store-brand").textContent = brand;
@@ -385,6 +409,7 @@ async function loadMainPageTitle() {
     const copy = !error && data ? data : fallbackCopy;
     if (!error && data && typeof data.payment_required === "boolean") applyPaymentMode(data.payment_required ? "prepaid" : "pay-on-delivery");
     applySiteColors(!error && data ? data : {});
+    applySiteLayout(!error && data ? data.layout_style : "");
     const productImageUrl = !error && data?.product_image_url ? data.product_image_url : localStorage.getItem(PRODUCT_IMAGE_CACHE_KEY) || "";
     if (!error && data?.product_image_url) localStorage.setItem(PRODUCT_IMAGE_CACHE_KEY, data.product_image_url);
     applyProductImage(productImageUrl);
