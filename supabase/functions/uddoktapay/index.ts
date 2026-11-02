@@ -6,6 +6,14 @@ const cors = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
+const getApiRoot = (value: string) => {
+  const url = new URL(value.trim());
+  url.pathname = url.pathname.replace(/\/(checkout-v2|checkout|verify-payment|refund-payment)\/?$/i, "").replace(/\/$/, "");
+  if (!url.pathname.endsWith("/api")) url.pathname = `${url.pathname}/api`;
+  url.search = "";
+  url.hash = "";
+  return url.toString().replace(/\/$/, "");
+};
 
 Deno.serve(async request => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: cors });
@@ -24,8 +32,7 @@ Deno.serve(async request => {
       if (!order?.p_customer_name || !order?.p_email || !order?.p_phone || !order?.p_address || Number(order?.p_total) <= 0) return json({ error: "Complete the required order details." }, 400);
       const { data: settings, error: settingsError } = await db.from("payment_settings").select("uddoktapay_api_key,uddoktapay_base_url").eq("id", 1).single();
       if (settingsError || !settings?.uddoktapay_api_key) return json({ error: "UddoktaPay is not configured in admin settings." }, 400);
-      const configuredUrl = String(settings.uddoktapay_base_url).replace(/\/$/, "");
-      const apiRoot = configuredUrl.endsWith("/api") ? configuredUrl : `${configuredUrl}/api`;
+      const apiRoot = getApiRoot(String(settings.uddoktapay_base_url));
       const token = crypto.randomUUID();
       const { error: intentError } = await db.from("payment_intents").insert({ token, payload: order });
       if (intentError) return json({ error: "Could not prepare payment." }, 500);
@@ -40,10 +47,16 @@ Deno.serve(async request => {
           metadata: { token }, redirect_url: redirectUrl, return_type: "GET", cancel_url: cancelUrl,
         }),
       });
-      const result = await response.json();
+      const responseText = await response.text();
+      let result: Record<string, unknown> = {};
+      try { result = JSON.parse(responseText); } catch { result = { message: responseText.trim() }; }
       if (!response.ok || result.status !== true || !result.payment_url) {
         await db.from("payment_intents").update({ status: "failed" }).eq("token", token);
-        return json({ error: result.message || "UddoktaPay did not create a checkout session." }, 502);
+        const upstreamMessage = String(result.message || "").trim();
+        const error = response.status === 404
+          ? `UddoktaPay returned HTTP 404 from ${apiRoot}/checkout-v2. Check the API base URL in Admin; use ${apiRoot} without an endpoint suffix.`
+          : `${upstreamMessage || "UddoktaPay did not create a checkout session."} (HTTP ${response.status} from ${apiRoot}/checkout-v2)`;
+        return json({ error }, 502);
       }
       return json({ payment_url: result.payment_url, token });
     }
@@ -57,8 +70,7 @@ Deno.serve(async request => {
       if (intent.status === "paid" && intent.order_number) return json({ order_number: intent.order_number, already_paid: true });
       const { data: settings, error: settingsError } = await db.from("payment_settings").select("uddoktapay_api_key,uddoktapay_base_url").eq("id", 1).single();
       if (settingsError || !settings?.uddoktapay_api_key) return json({ error: "Payment verification is not configured." }, 500);
-      const configuredUrl = String(settings.uddoktapay_base_url).replace(/\/$/, "");
-      const apiRoot = configuredUrl.endsWith("/api") ? configuredUrl : `${configuredUrl}/api`;
+      const apiRoot = getApiRoot(String(settings.uddoktapay_base_url));
       const response = await fetch(`${apiRoot}/verify-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json", "RT-UDDOKTAPAY-API-KEY": settings.uddoktapay_api_key },

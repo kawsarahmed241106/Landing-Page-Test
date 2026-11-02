@@ -345,7 +345,19 @@ document.getElementById("order-form").addEventListener("submit", async event => 
       const { data, error } = await client.functions.invoke("uddoktapay", { body: { action: "create", order: payload } });
       if (error) {
         let details = "";
-        try { details = (await error.context.clone().json())?.error || ""; } catch { /* use the function client's message */ }
+        const response = error.context;
+        if (response && typeof response.clone === "function") {
+          try {
+            const bodyText = await response.clone().text();
+            if (bodyText) {
+              try {
+                const body = JSON.parse(bodyText);
+                details = body.error || body.message || body.msg || "";
+              } catch { details = bodyText.slice(0, 500); }
+            }
+            if (!details && response.status) details = `Payment service returned HTTP ${response.status}.`;
+          } catch { /* fall back to the function client's message */ }
+        }
         throw new Error(details || error.message || "Could not start UddoktaPay checkout.");
       }
       if (!data?.payment_url || !data?.token) throw new Error(data?.error || "Could not start UddoktaPay checkout.");

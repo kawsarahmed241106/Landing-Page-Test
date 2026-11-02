@@ -169,7 +169,7 @@
             <label><input type="radio" name="payment-mode" value="pay-on-delivery" checked> Pay on delivery</label>
             <label><input type="radio" name="payment-mode" value="prepaid"> Prepay required</label>
           </fieldset>
-          <div id="uddoktapay-key-wrap" hidden><label for="uddoktapay-base-url">UddoktaPay API base URL</label><input id="uddoktapay-base-url" type="url" value="https://smmcaptain.paymently.io/api" placeholder="https://smmcaptain.paymently.io/api"><label for="uddoktapay-api-key">UddoktaPay API key</label><input id="uddoktapay-api-key" type="password" autocomplete="new-password" placeholder="Enter your UddoktaPay API key"><span class="field-help">Stored in Supabase and used only by the payment backend.</span></div>
+          <div id="uddoktapay-key-wrap" hidden><label for="uddoktapay-base-url">UddoktaPay API base URL</label><input id="uddoktapay-base-url" type="url" value="https://smmcaptain.paymently.io/api" placeholder="https://smmcaptain.paymently.io/api"><span class="field-help">You can enter the API base URL or a checkout endpoint URL; the payment service will normalize it.</span><label for="uddoktapay-api-key">UddoktaPay API key</label><input id="uddoktapay-api-key" type="password" autocomplete="new-password" placeholder="Enter your UddoktaPay API key"><span class="field-help">Stored in Supabase and used only by the payment backend.</span></div>
           <div class="settings-actions"><span class="save-message" id="settings-save-message" aria-live="polite"></span></div>
         </form>
       </section>
