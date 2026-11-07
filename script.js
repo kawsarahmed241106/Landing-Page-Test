@@ -5,7 +5,8 @@ const LOGO_URL_CACHE_KEY = "site-logo-url";
 const HEADER_COPY_CACHE_KEY = "site-header-copy";
 const SITE_COLORS_KEY = "site-colors";
 const SITE_LAYOUT_KEY = "site-layout";
-const SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight", "minimal", "classic"]);
+const META_PIXEL_CACHE_KEY = "site-meta-pixel-id";
+const SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight"]);
 
 function applySiteLayout(layout = "") {
   const cached = localStorage.getItem(SITE_LAYOUT_KEY) || "original";
@@ -14,6 +15,22 @@ function applySiteLayout(layout = "") {
   const stylesheet = document.getElementById("store-layout-style");
   if (stylesheet) stylesheet.href = `layouts/layout-${selected}.css`;
   if (layout) localStorage.setItem(SITE_LAYOUT_KEY, selected);
+}
+
+function applyMetaPixel(pixelId = "") {
+  const id = String(pixelId || "").trim();
+  if (!/^\d{5,20}$/.test(id)) {
+    document.getElementById("meta-pixel-loader")?.remove();
+    localStorage.removeItem(META_PIXEL_CACHE_KEY);
+    return;
+  }
+  if (window.__siteMetaPixelId === id) return;
+  window.__siteMetaPixelId = id;
+  localStorage.setItem(META_PIXEL_CACHE_KEY, id);
+  const loader = document.createElement("script");
+  loader.id = "meta-pixel-loader";
+  loader.textContent = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',${JSON.stringify(id)});fbq('track','PageView');`;
+  document.head.appendChild(loader);
 }
 const PRODUCT_IMAGE_CACHE_KEY = "site-product-image-url";
 const PRODUCT_TITLE_CACHE_KEY = "site-product-title";
@@ -401,6 +418,7 @@ async function loadMainPageTitle() {
     fallbackCopy = JSON.parse(localStorage.getItem(HEADER_COPY_CACHE_KEY) || "{}");
     const credentials = JSON.parse(localStorage.getItem(SUPABASE_SETTINGS_KEY) || "null");
     if (!credentials?.url || !credentials?.publishableKey || !window.supabase) {
+      applyMetaPixel(localStorage.getItem(META_PIXEL_CACHE_KEY) || "");
       applyPaymentMode(localStorage.getItem(PAYMENT_MODE_CACHE_KEY));
       applySiteColors();
       applyProductImage(localStorage.getItem(PRODUCT_IMAGE_CACHE_KEY) || "");
@@ -415,6 +433,10 @@ async function loadMainPageTitle() {
     }
     const client = window.supabase.createClient(credentials.url, credentials.publishableKey);
     const { data, error } = await client.from("main_page_settings").select("*").eq("id", 1).maybeSingle();
+    const configuredPixelId = !error && data && Object.prototype.hasOwnProperty.call(data, "meta_pixel_id")
+      ? data.meta_pixel_id
+      : localStorage.getItem(META_PIXEL_CACHE_KEY) || "";
+    applyMetaPixel(configuredPixelId);
     const title = !error && data?.main_title ? data.main_title : fallbackTitle;
     const brand = !error && data?.brand_name ? data.brand_name : fallbackBrand;
     const logoUrl = !error && data?.logo_url ? data.logo_url : fallbackLogo;
@@ -435,6 +457,7 @@ async function loadMainPageTitle() {
     renderIdentity(title, brand, logoUrl, copy);
   } catch (error) {
     console.error("Could not load the main page title:", error);
+    applyMetaPixel(localStorage.getItem(META_PIXEL_CACHE_KEY) || "");
     applyPaymentMode(localStorage.getItem(PAYMENT_MODE_CACHE_KEY));
     applySiteColors();
     applyProductImage(localStorage.getItem(PRODUCT_IMAGE_CACHE_KEY) || "");

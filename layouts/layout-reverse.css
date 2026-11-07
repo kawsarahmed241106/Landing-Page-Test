@@ -12,3 +12,11 @@ body[data-layout="reverse"] .site-footer{background:var(--bg-surface,#fff)!impor
 body[data-layout="reverse"] .site-footer .footer-brand,body[data-layout="reverse"] .site-footer .footer-main h2,body[data-layout="reverse"] .site-footer .footer-contact>a,body[data-layout="reverse"] .site-footer .footer-office>div,body[data-layout="reverse"] .site-footer .footer-office address,body[data-layout="reverse"] .site-footer .footer-brand-block p{color:var(--secondary-color,var(--ink))!important}
 body[data-layout="reverse"] .site-footer .footer-contact svg,body[data-layout="reverse"] .site-footer .footer-office svg{stroke:var(--primary-color,var(--green))}
 body[data-layout="reverse"] .site-footer .footer-bottom{background:color-mix(in srgb,var(--tertiary-color,var(--tertiary)) 16%,white)!important;color:var(--secondary-color,var(--ink))!important}
+/* Glass Frost mobile: clear the floating nav and render the complete image at natural ratio. */
+@media(max-width:850px){
+  body[data-layout="reverse"]{padding-top:88px!important}
+  body[data-layout="reverse"] .checkout-layout{margin:0 auto 32px!important;gap:22px}
+  body[data-layout="reverse"] .product-visual.has-product-image{position:relative;top:auto;width:min(100%,520px);height:auto;min-height:0;max-height:none;aspect-ratio:auto;align-self:center;overflow:hidden}
+  body[data-layout="reverse"] .product-visual.has-product-image .product-photo{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:none;object-fit:contain!important;object-position:center}
+}
+@media(max-width:560px){body[data-layout="reverse"]{padding-top:84px!important}body[data-layout="reverse"] .checkout-layout{width:calc(100% - 24px)!important;margin:0 auto 24px!important;gap:16px}body[data-layout="reverse"] .product-visual.has-product-image{width:100%;max-width:none;border-radius:18px}}

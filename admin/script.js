@@ -7,7 +7,7 @@ const LOGO_URL_CACHE_KEY = "site-logo-url";
 const HEADER_COPY_CACHE_KEY = "site-header-copy";
 const SITE_COLORS_KEY = "site-colors";
 const SITE_LAYOUT_KEY = "site-layout";
-const ALLOWED_SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight", "minimal", "classic"]);
+const ALLOWED_SITE_LAYOUTS = new Set(["original", "editorial", "showcase", "reverse", "compact", "immersive", "soft", "midnight"]);
 const PRODUCT_IMAGE_CACHE_KEY = "site-product-image-url";
 const PRODUCT_TITLE_CACHE_KEY = "site-product-title";
 const DEFAULT_PRODUCT_TITLE = "Primal Gold (প্রাইমাল গোল্ড) – সুখী দাম্পত্যের সুন্দর মুহূর্তগুলোকে আরো সুন্দর করুন";
@@ -199,14 +199,17 @@ function setSiteColors(values = {}) {
 }
 
 function setSiteLayout(layout = "") {
-  let cached = "classic";
-  try { cached = localStorage.getItem(SITE_LAYOUT_KEY) || cached; } catch { /* keep default */ }
-  const selected = ALLOWED_SITE_LAYOUTS.has(layout) ? layout : cached;
+  let cached = "original";
+  try {
+    const stored = localStorage.getItem(SITE_LAYOUT_KEY);
+    if (ALLOWED_SITE_LAYOUTS.has(stored)) cached = stored;
+  } catch { /* keep default */ }
+  const selected = ALLOWED_SITE_LAYOUTS.has(layout) ? layout : ALLOWED_SITE_LAYOUTS.has(cached) ? cached : "original";
   const radio = document.querySelector(`input[name="layout-style"][value="${selected}"]`)
-    || document.querySelector('input[name="layout-style"][value="classic"]');
+    || document.querySelector('input[name="layout-style"][value="original"]');
   if (radio) radio.checked = true;
   document.querySelectorAll("[data-layout-card]").forEach(card => {
-    card.classList.toggle("selected", card.dataset.layoutCard === (radio?.value || "classic"));
+    card.classList.toggle("selected", card.dataset.layoutCard === (radio?.value || "original"));
   });
 }
 
@@ -459,6 +462,7 @@ async function loadMainTitle() {
     $("footer-location-input").value = data.footer_location;
     localStorage.setItem(FOOTER_LOCATION_CACHE_KEY, data.footer_location);
   }
+  if (!error && data) $("meta-pixel-code").value = data.meta_pixel_id || "";
 }
 
 function closeMobileNav() {
@@ -580,7 +584,7 @@ document.querySelectorAll('input[name="layout-style"]').forEach(radio => {
 
 $("colors-form").addEventListener("submit", async event => {
   event.preventDefault();
-  const layoutStyle = document.querySelector('input[name="layout-style"]:checked')?.value || "classic";
+  const layoutStyle = document.querySelector('input[name="layout-style"]:checked')?.value || "original";
   const colors = {
     primary_color: $("primary-color").value.trim(),
     secondary_color: $("secondary-color").value.trim(),
@@ -897,6 +901,14 @@ $("supabase-settings-form").addEventListener("submit", async (event) => {
     $("settings-save-message").style.color = "#b34432";
     return;
   }
+  const pixelInput = $("meta-pixel-code").value.trim();
+  const pixelMatch = pixelInput.match(/^\d{5,20}$/) || pixelInput.match(/fbq\s*\(\s*["']init["']\s*,\s*["'](\d{5,20})["']\s*\)/i);
+  const metaPixelId = pixelMatch ? (pixelMatch[1] || pixelMatch[0]) : "";
+  if (pixelInput && !metaPixelId) {
+    $("settings-save-message").textContent = "Enter a valid numeric Meta Pixel ID or paste the official base code containing fbq('init', 'PIXEL_ID').";
+    $("settings-save-message").style.color = "#b34432";
+    return;
+  }
   localStorage.setItem(SUPABASE_SETTINGS_KEY, JSON.stringify({ url, publishableKey }));
   $("supabase-url").value = url;
   $("settings-save-message").textContent = "Supabase settings saved in this browser. Checking connection…";
@@ -921,10 +933,10 @@ $("supabase-settings-form").addEventListener("submit", async (event) => {
       const { error: keyError } = await client.from("payment_settings").upsert({ id: 1, uddoktapay_api_key: apiKey, uddoktapay_base_url: baseUrl, updated_at: new Date().toISOString() });
       if (keyError) { $("settings-save-message").textContent = `Could not save API key: ${keyError.message}`; return; }
     }
-    const { error: modeError } = await client.from("main_page_settings").upsert({ id: 1, payment_required: required, updated_at: new Date().toISOString() });
-    if (modeError) { $("settings-save-message").textContent = `Could not save payment mode: ${modeError.message}`; return; }
+    const { error: modeError } = await client.from("main_page_settings").upsert({ id: 1, payment_required: required, meta_pixel_id: metaPixelId, updated_at: new Date().toISOString() });
+    if (modeError) { $("settings-save-message").textContent = `Could not save settings: ${modeError.message}`; return; }
     localStorage.setItem(PAYMENT_MODE_CACHE_KEY, mode);
-    $("settings-save-message").textContent = "Supabase connected. Payment settings saved.";
+    $("settings-save-message").textContent = "Supabase connected. Settings saved.";
     $("settings-save-message").style.color = "#37885a";
   }
 });

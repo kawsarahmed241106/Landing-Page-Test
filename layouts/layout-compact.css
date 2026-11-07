@@ -12,10 +12,55 @@ body[data-layout="compact"] .topbar .brand,body[data-layout="compact"] .topbar #
 body[data-layout="compact"] .topbar .benefit{display:inline-flex!important;align-items:center;color:var(--bg-surface,#fff)!important;font-size:12px!important;opacity:1!important;visibility:visible!important}
 body[data-layout="compact"] .topbar .benefit span{display:inline!important;color:var(--bg-surface,#fff)!important;font-size:inherit!important}
 body[data-layout="compact"] .topbar .order-call{display:flex!important;align-items:center;gap:8px;background:var(--primary-color,var(--green))!important;color:var(--bg-surface,#fff)!important}
+body[data-layout="compact"] .topbar .order-call>svg{display:block!important;visibility:visible!important;opacity:1!important;width:20px!important;height:20px!important;flex:0 0 20px!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important}
 body[data-layout="compact"] .topbar .order-call span,body[data-layout="compact"] .topbar .order-call strong{display:inline!important;color:var(--bg-surface,#fff)!important;font-size:13px!important;line-height:1.2!important}
-/* Keep Compact Express product artwork in view while its checkout column scrolls. */
+/* Keep the Urban Market product artwork in view while its checkout column scrolls. */
 @media(min-width:761px){body[data-layout="compact"] .product-visual{position:sticky;top:78px;align-self:start}}
-/* Align Compact Express image, product details and delivery summary as equal-height columns. */
+/* Align the Urban Market image, product details and delivery summary as equal-height columns. */
 @media(min-width:1001px){body[data-layout="compact"] .checkout-layout{align-items:stretch}body[data-layout="compact"] .product-visual,body[data-layout="compact"] .product-visual.has-product-image{height:100%;min-height:100%;aspect-ratio:auto;align-self:stretch;top:78px}body[data-layout="compact"] .product-visual.has-product-image .product-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}body[data-layout="compact"] .order-panel{height:100%;align-self:stretch;align-items:stretch}body[data-layout="compact"] .product-details,body[data-layout="compact"] .checkout-summary{height:100%}}
 /* Preserve the product artwork size while extending its card to align with checkout cards. */
 @media(min-width:1001px){body[data-layout="compact"] .checkout-layout{align-items:stretch}body[data-layout="compact"] .product-visual,body[data-layout="compact"] .product-visual.has-product-image{position:relative;top:auto;width:min(100%,480px);height:auto;min-height:0;aspect-ratio:auto;align-self:stretch;overflow:hidden}body[data-layout="compact"] .product-visual.has-product-image .product-photo{position:absolute;top:0;left:0;right:auto;bottom:auto;width:100%;height:auto;max-height:none;object-fit:contain}body[data-layout="compact"] .order-panel{height:100%;align-self:stretch}}
+/* Urban Market: keep the product card at the image's intrinsic height, like the storefront. */
+@media(min-width:761px){body[data-layout="compact"] .checkout-layout{align-items:start}body[data-layout="compact"] .product-visual.has-product-image{position:sticky;top:115px;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:auto;align-self:start;overflow:hidden}body[data-layout="compact"] .product-visual.has-product-image .product-photo{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:center}}
+@media(max-width:760px){body[data-layout="compact"] .product-visual.has-product-image{position:relative;top:auto;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:auto;align-self:auto;overflow:hidden}body[data-layout="compact"] .product-visual.has-product-image .product-photo{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:center}}
+/* Keep the Urban Market masthead pinned at the viewport top while scrolling. */
+body[data-layout="compact"]{padding-top:76px!important}
+body[data-layout="compact"] .topbar{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:1000!important;width:100%!important}
+/* Urban Market mobile masthead: balanced brand mark and compact call action. */
+@media(max-width:760px){
+  body[data-layout="compact"]{padding-top:66px!important}
+  body[data-layout="compact"] .topbar{height:66px!important;min-height:66px!important;background:var(--secondary-color,var(--ink))!important;border-bottom:1px solid color-mix(in srgb,var(--primary-color,var(--green)) 45%,transparent)!important}
+  body[data-layout="compact"] .topbar-inner{width:100%!important;height:66px!important;min-height:66px!important;padding:0 18px!important;gap:12px!important;justify-content:space-between!important}
+  body[data-layout="compact"] .topbar .brand{display:inline-flex!important;align-items:center!important;gap:9px!important;min-width:0;font:700 19px/1.1 'DM Sans',Arial,sans-serif!important;white-space:nowrap}
+  body[data-layout="compact"] .topbar .brand-image{display:block;width:44px!important;height:44px!important;flex:0 0 44px!important;margin:0!important;object-fit:contain}
+  body[data-layout="compact"] .topbar #store-brand{display:inline!important;color:var(--bg-surface,#fff)!important;font-size:19px!important;line-height:1.1!important}
+  body[data-layout="compact"] .topbar .benefits{display:none!important}
+  body[data-layout="compact"] .topbar .order-call{display:inline-flex!important;align-items:center;justify-content:center;gap:7px;margin:0!important;padding:9px 12px!important;border:1px solid color-mix(in srgb,var(--primary-color,var(--green)) 65%,transparent)!important;border-radius:12px!important;background:var(--primary-color,var(--green))!important;color:var(--bg-surface,#fff)!important}
+  body[data-layout="compact"] .topbar .order-call>svg{width:17px!important;height:17px!important;flex-basis:17px!important;stroke:var(--bg-surface,#fff)!important}
+  body[data-layout="compact"] .topbar .order-call span,body[data-layout="compact"] .topbar .order-call strong{font-size:12px!important;line-height:1.1!important;color:var(--bg-surface,#fff)!important}
+}
+@media(max-width:420px){body[data-layout="compact"]{padding-top:60px!important}body[data-layout="compact"] .topbar,body[data-layout="compact"] .topbar-inner{height:60px!important;min-height:60px!important}body[data-layout="compact"] .topbar-inner{padding:0 12px!important}body[data-layout="compact"] .topbar .brand{gap:7px!important;font-size:17px!important}body[data-layout="compact"] .topbar .brand-image{width:38px!important;height:38px!important;flex-basis:38px!important}body[data-layout="compact"] .topbar #store-brand{font-size:17px!important}body[data-layout="compact"] .topbar .order-call{gap:5px;padding:8px 9px!important}body[data-layout="compact"] .topbar .order-call>svg{width:15px!important;height:15px!important;flex-basis:15px!important}body[data-layout="compact"] .topbar .order-call span,body[data-layout="compact"] .topbar .order-call strong{font-size:11px!important}}
+/* Center the Urban Market product artwork within the mobile image card. */
+@media(max-width:760px){body[data-layout="compact"] .checkout-layout{width:calc(100% - 32px)!important;margin-left:auto!important;margin-right:auto!important;justify-items:stretch}body[data-layout="compact"] .product-visual.has-product-image{display:flex;align-items:center;justify-content:center;width:100%!important;margin-left:auto!important;margin-right:auto!important;justify-self:center;box-sizing:border-box}body[data-layout="compact"] .product-visual.has-product-image .product-photo{display:block;width:100%;height:100%;object-fit:contain;object-position:center;margin:0 auto}}
+/* Urban Market mobile polish: centered gallery and a readable, stacked footer. */
+@media(max-width:560px){
+  body[data-layout="compact"] .checkout-layout{width:calc(100% - 32px)!important;max-width:480px!important;margin:18px auto!important;display:flex!important;flex-direction:column!important;align-items:center!important}
+  body[data-layout="compact"] .checkout-layout>.product-visual.has-product-image{width:100%!important;max-width:100%!important;margin:0 auto 12px!important;align-self:center!important;justify-self:center!important;transform:none!important}
+  body[data-layout="compact"] .checkout-layout>.product-visual.has-product-image .product-photo{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important}
+  body[data-layout="compact"] .site-footer{margin-top:30px!important;border-top:1px solid color-mix(in srgb,var(--primary-color,var(--green)) 28%,var(--tertiary-color,var(--tertiary)))!important;background:var(--bg-surface,#fff)!important;color:var(--secondary-color,var(--ink))!important}
+  body[data-layout="compact"] .footer-main{width:calc(100% - 40px)!important;max-width:480px!important;margin:0 auto!important;padding:28px 0 24px!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:24px!important}
+  body[data-layout="compact"] .footer-brand-block{grid-column:auto!important;text-align:center}
+  body[data-layout="compact"] .footer-brand{justify-content:center!important;gap:10px!important;font-size:24px!important;color:var(--secondary-color,var(--ink))!important}
+  body[data-layout="compact"] .footer-brand img{width:48px!important;height:48px!important}
+  body[data-layout="compact"] .footer-brand-block p{max-width:400px!important;margin:12px auto 0!important;text-align:center;line-height:1.55}
+  body[data-layout="compact"] .footer-socials{justify-content:center!important;margin-top:16px!important}
+  body[data-layout="compact"] .footer-contact,body[data-layout="compact"] .footer-office{min-width:0!important;width:100%!important;align-items:stretch!important}
+  body[data-layout="compact"] .footer-main h2{margin:0 0 12px!important;font-size:17px!important;color:var(--secondary-color,var(--ink))!important}
+  body[data-layout="compact"] .footer-contact>a,body[data-layout="compact"] .footer-office>div{min-width:0!important;gap:12px!important;font-size:14px!important;line-height:1.5!important;color:var(--secondary-color,var(--ink))!important}
+  body[data-layout="compact"] .footer-contact>a span{min-width:0;overflow-wrap:anywhere;word-break:normal}
+  body[data-layout="compact"] #footer-phone,body[data-layout="compact"] #footer-whatsapp-number{white-space:nowrap}
+  body[data-layout="compact"] .footer-office address{min-width:0;overflow-wrap:anywhere;white-space:pre-line}
+  body[data-layout="compact"] .footer-bottom{width:100%!important;min-height:0!important;padding:14px 18px!important;background:color-mix(in srgb,var(--tertiary-color,var(--tertiary)) 24%,var(--bg-surface,#fff))!important;color:var(--secondary-color,var(--ink))!important;font-size:12px!important;line-height:1.5!important;text-align:center}
+}
+/* Center the image card by its own midpoint, independent of inherited card margins. */
+@media(max-width:760px){body[data-layout="compact"] .checkout-layout{width:calc(100% - 32px)!important;max-width:480px!important;margin-left:auto!important;margin-right:auto!important;align-items:stretch!important}body[data-layout="compact"] .product-visual.has-product-image{position:relative!important;left:auto!important;right:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin:0 auto 12px!important;align-self:stretch!important;box-sizing:border-box!important}}

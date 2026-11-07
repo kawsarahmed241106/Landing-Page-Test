@@ -100,8 +100,6 @@
               <label class="layout-card" data-layout-card="immersive"><input type="radio" name="layout-style" value="immersive"><span class="layout-preview preview-immersive"><i></i><i></i><i></i></span><strong>Luxury Editorial</strong><small>High-end brand-led product editorial</small></label>
               <label class="layout-card" data-layout-card="soft"><input type="radio" name="layout-style" value="soft"><span class="layout-preview preview-soft"><i></i><i></i><i></i></span><strong>Soft Organic</strong><small>Warm shapes and friendly rounded forms</small></label>
               <label class="layout-card" data-layout-card="midnight"><input type="radio" name="layout-style" value="midnight"><span class="layout-preview preview-midnight"><i></i><i></i><i></i></span><strong>Neon Pulse</strong><small>Dark high-energy storefront with vivid accents</small></label>
-              <label class="layout-card" data-layout-card="minimal"><input type="radio" name="layout-style" value="minimal"><span class="layout-preview preview-minimal"><i></i><i></i><i></i></span><strong>Split Focus</strong><small>Asymmetric product hero and horizontal checkout</small></label>
-              <label class="layout-card" data-layout-card="classic"><input type="radio" name="layout-style" value="classic"><span class="layout-preview preview-classic"><i></i><i></i><i></i></span><strong>Compact Express</strong><small>Mobile-first compact product and checkout</small></label>
             </div>
           </fieldset>
           <label for="primary-color">Primary</label><div class="color-input-row"><input id="primary-picker" type="color" value="#119b5d" aria-label="Choose primary color"><input id="primary-color" type="text" value="#119b5d" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#119b5d" required></div><span class="field-help">Main brand color for buttons, prices, and highlights.</span>
@@ -165,6 +163,9 @@
           <input id="supabase-url" name="supabase-url" type="url" inputmode="url" placeholder="https://your-project.supabase.co" autocomplete="url" required>
           <label for="supabase-key">Publishable key</label>
           <input id="supabase-key" name="supabase-key" type="text" spellcheck="false" autocomplete="off" placeholder="sb_publishable_…" required>
+          <label for="meta-pixel-code">Meta Pixel code or Pixel ID</label>
+          <textarea id="meta-pixel-code" rows="5" spellcheck="false" autocomplete="off" placeholder="Paste the Meta Pixel base code or enter its numeric Pixel ID"></textarea>
+          <span class="field-help">The Pixel ID is saved to Supabase. The storefront safely installs Meta’s standard Pixel code in the page head; pasted JavaScript is never executed.</span>
           <fieldset class="payment-mode-picker"><legend>Order payment mode</legend>
             <label><input type="radio" name="payment-mode" value="pay-on-delivery" checked> Pay on delivery</label>
             <label><input type="radio" name="payment-mode" value="prepaid"> Prepay required</label>
